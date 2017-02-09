@@ -1,0 +1,259 @@
+<html>
+<title>Unit Convertor</title>
+<!-- <style type="text/css">
+	input[type="button"] {
+		width: 120px;
+		margin-left: 35px;
+		display: inline-grid;
+	}
+</style> -->
+<body>
+	<script type="text/javascript">
+
+		function changeDropDown(id){ // all the unit selection dropdowns are made here
+
+/*
+depepding the radio button id, change the innerHTML of the dropdowns with apropriate units
+*/
+			document.getElementById('number1').value=""; //clear the inpuut box
+			document.getElementById('number2').value=""; // clear the output box
+
+
+			if(id==="distance"){
+
+				document.getElementById('ddown1').innerHTML=""; // clear the previous selection if exists
+				document.getElementById('ddown1').innerHTML=" <select><option>Choose a unit</option> <option id='meters'>Meters</option><option id='kilometers'>Kilometers</option><option id='miles'>Miles</option><option id='feet'>Feet</option></select>";
+				document.getElementById('ddown2').innerHTML="";
+				document.getElementById('ddown2').innerHTML="<select><option>Choose a unit</option> <option id='meters'>Meters</option><option id='kilometers'>Kilometers</option><option id='miles'>Miles</option><option id='feet'>Feet</option></select>";
+
+			} else if (id==="time"){
+
+				document.getElementById('ddown1').innerHTML=""; // clear the previous selection if exists
+				document.getElementById('ddown1').innerHTML=" <select><option>Choose a unit</option><option id='hours'>Hours</option><option id='minutes'>Minutes</option><option id='seconds'>Seconds</option><option id='milliseconds'>Milliseconds</option></select>";
+				document.getElementById('ddown2').innerHTML="";
+				document.getElementById('ddown2').innerHTML=" <select><option>Choose a unit</option> <option id='hours'>Hours</option><option id='minutes'>Minutes</option><option id='seconds'>Seconds</option><option id='milliseconds'>Milliseconds</option></select>";
+
+			} else if (id==="temperature"){
+
+				document.getElementById('ddown1').innerHTML=""; // clear the previous selection if exists
+				document.getElementById('ddown1').innerHTML=" <select><option>Choose a unit</option> <option id='celcius'>Celcius</option><option id='fareheit'>Farenheit</option><option id='kelvin'>Kelvin</option></select>";
+				document.getElementById('ddown2').innerHTML="";
+				document.getElementById('ddown2').innerHTML=" <select><option>Choose a unit</option> <option id='celcius'>Celcius</option><option id='fareheit'>Farenheit</option><option id='kelvin'>Kelvin</option></select>";
+
+			}
+
+		}
+	</script>
+
+	<h2> Select a unit to get started</h2>
+	
+	<input type="radio" name="units" id="distance" value="distance" onclick="changeDropDown(this.id)"> Distance
+	<input type="radio" name="units" id="time" value="time" onclick="changeDropDown(this.id)"> Time
+	<input type="radio" name="units" id="temperature" value="temperature" onclick="changeDropDown(this.id)"> Temperature
+	<hr>
+	<class>
+		<input type="number" id="number1" placeholder="input here ex: '0'" required="required" onkeyup="convert(document.getElementById('ddown1').value,document.getElementById('ddown2').value)"> <select id="ddown1" onchange="convert(document.getElementById('ddown1').value,document.getElementById('ddown2').value)""> </select>
+
+		<!-- The switch button -->
+		<input type="button" id="switchButton" name="switchButton" value="Switch Units" onclick="swap();"> 
+		<script type="text/javascript">
+			function swap(){
+
+				temp = document.getElementById('ddown1').value;
+				document.getElementById('ddown1').value = document.getElementById('ddown2').value;
+				document.getElementById('ddown2').value = temp
+
+				convert(document.getElementById('ddown1').value,document.getElementById('ddown2').value);
+			}
+		</script>
+
+
+		<input type="number" id="number2" readonly="readonly" placeholder="Result appears here"> <select id="ddown2" onchange="convert(document.getElementById('ddown1').value,document.getElementById('ddown2').value)""> </select>
+	</class>
+	<br>
+	<br>
+	<br>
+	<!-- <input type="text" name="rough" id="rough" style="resize: both;"> -->
+	<script type="text/javascript">
+		function convert(value1,value2){
+
+			var enteredValue = parseFloat(document.getElementById('number1').value);
+			var result = document.getElementById('number2');
+			if(value1==="Meters" && value2==="Meters"){ //converting METERS TO METERS
+
+				result.value=enteredValue;
+
+			} else if (value1==="Meters" && value2==="Kilometers"){ //converting METERS TO KILOMETERS
+				
+				result.value = (parseInt(enteredValue)/1000).toFixed(2);
+
+			} else if (value1==="Meters" && value2==="Kilometers"){ //converting METERS TO KILOMETERS
+				
+				result.value = (parseInt(enteredValue)*1000).toFixed(2);
+
+			} else if (value1==="Meters" && value2==="Miles"){ // converting METERS TO MILES
+
+				result.value = (enteredValue/1609.334).toFixed(2);
+
+			} else if(value1==="Meters" && value2==="Feet"){ //converting MILES TO FEET
+
+				result.value = ((enteredValue)*3.28).toFixed(2);
+
+			} else if (value1==="Kilometers" && value2==="Meters"){ //converting METERS TO KILOMETERS
+				
+				result.value = (parseInt(enteredValue)*1000).toFixed(2);
+
+			} else if (value1==="Kilometers" && value2==="Kilometers"){ //converting METERS TO KILOMETERS
+				
+				result.value = (enteredValue).toFixed(2);
+
+			}  else if (value1==="Kilometers" && value2==="Miles"){ //converting METERS TO KILOMETERS
+				
+				result.value = (parseInt(enteredValue)*0.62).toFixed(2);
+
+			} else if (value1==="Kilometers" && value2==="Feet"){ //converting METERS TO KILOMETERS
+				
+				result.value = (parseInt(enteredValue)*3280.84).toFixed(2);
+
+			} else if (value1==="Miles" && value2==="Meters"){ // converting METERS TO MILES
+
+				result.value = (enteredValue*1609.334).toFixed(2);
+
+			}  else if (value1==="Miles" && value2==="Kilometers"){ //converting METERS TO KILOMETERS
+				
+				result.value = (parseInt(enteredValue)/0.62).toFixed(2);
+
+			}  else if (value1==="Miles" && value2==="Miles"){ //converting METERS TO KILOMETERS
+				
+				result.value = enteredValue.toFixed(2);
+
+			} else if (value1==="Miles" && value2==="Feet"){ //converting METERS TO KILOMETERS
+				
+				result.value = (parseInt(enteredValue)*5280).toFixed(2);
+
+			} else if(value1==="Feet" && value2==="Meters"){ //converting MILES TO FEET
+
+				result.value = ((enteredValue)/3.28).toFixed(2);
+
+			} else if (value1==="Feet" && value2==="Kilometers"){ //converting METERS TO KILOMETERS
+				
+				result.value = (parseInt(enteredValue)/3280.84).toFixed(2);
+
+			} else if (value1==="Feet" && value2==="Miles"){ //converting METERS TO KILOMETERS
+				
+				result.value = (parseInt(enteredValue)/5280).toFixed(2);
+
+			} else if (value1==="Feet" && value2==="Feet"){ //converting METERS TO KILOMETERS
+				
+				result.value = (enteredValue).toFixed(2);
+
+			}
+
+			if(value1==="Hours" && value2==="Hours") { //~~~~~~~ TIME UNITS ~~~~~~~~
+
+				result.value = enteredValue;
+
+			} else if(value1==="Hours" && value2==="Minutes") { 
+
+				result.value = parseInt(enteredValue)*60;
+
+			} else if(value1==="Hours" && value2==="Seconds") { 
+
+				result.value = parseInt(enteredValue)*60*60;
+
+			} else if(value1==="Hours" && value2==="Milliseconds") { 
+
+				result.value = parseInt(enteredValue)*3600000;
+
+			} else if(value1==="Minutes" && value2==="Hours") { 
+
+				result.value = (parseInt(enteredValue)/60).toFixed(2);
+
+			} else if(value1==="Minutes" && value2==="Minutes") { 
+
+				result.value = parseInt(enteredValue);
+
+			} else if(value1==="Minutes" && value2==="Seconds") { 
+
+				result.value = parseInt(enteredValue)*60;
+
+			} else if(value1==="Minutes" && value2==="Milliseconds") { 
+
+				result.value = parseInt(enteredValue)*60000;
+
+			} else if(value1==="Seconds" && value2==="Hours") { 
+
+				result.value = (parseInt(enteredValue)/3600).toFixed(2);
+
+			} else if(value1==="Seconds" && value2==="Minutes") { 
+
+				result.value = (parseInt(enteredValue)/60).toFixed(2);
+
+			} else if(value1==="Seconds" && value2==="Seconds") { 
+
+				result.value = enteredValue.toFixed(2);
+
+			} else if(value1==="Seconds" && value2==="Milliseconds") { 
+
+				result.value = (parseInt(enteredValue)* 1000).toFixed(2);
+
+			}  else if(value1==="Milliseconds" && value2==="Hours") { 
+
+				result.value = (parseInt(enteredValue)/3600000).toFixed(2)
+
+			} else if(value1==="Milliseconds" && value2==="Minutes") { 
+
+				result.value = parseInt(enteredValue)/60000;
+
+			} else if(value1==="Milliseconds" && value2==="Seconds") { 
+
+				result.value = (parseInt(enteredValue)/1000).toFixed(2);
+
+			} else if(value1==="Milliseconds" && value2==="Milliseconds") { 
+
+				result.value = (parseInt(enteredValue)).toFixed(2);
+
+			}
+
+			if(value1==="Celcius" && value2==="Celcius"){
+
+				result.value=((parseInt(enteredValue))).toFixed(2)
+			} else if (value1==="Celcius" && value2==="Farenheit"){
+
+				result.value =(parseFloat(enteredValue)*(9/5)+32).toFixed(2);
+
+			} else if (value1==="Celcius" && value2==="Kelvin"){
+
+				result.value =(parseFloat(enteredValue)+273.15).toFixed(2);
+
+			} else if (value1==="Farenheit" && value2==="Celcius"){
+
+				result.value =(parseFloat(enteredValue-32)*(5/9)).toFixed(2);
+
+			} else if (value1==="Farenheit" && value2==="Farenheit"){
+
+				result.value =((parseFloat(enteredValue))).toFixed(2);
+
+			} else if (value1==="Farenheit" && value2==="Kelvin"){
+
+				result.value =((parseFloat(enteredValue)+459.67)*(5/9)).toFixed(2);
+
+			} else if (value1==="Kelvin" && value2==="Celcius"){
+
+				result.value =(parseFloat(enteredValue)-273.15).toFixed(2);
+
+			} else if (value1==="Kelvin" && value2==="Farenheit"){
+
+				result.value =((parseFloat(enteredValue)*(9/5)-459.67)).toFixed(2);
+
+			} else if (value1==="Kelvin" && value2==="Kelvin"){
+
+				result.value =(parseFloat(enteredValue)).toFixed(2);
+
+			} 
+
+		}
+
+	</script>
+</body>
+</html>
