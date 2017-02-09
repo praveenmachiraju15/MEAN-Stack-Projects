@@ -1,0 +1,13 @@
+This project successfully takes in input from an HTML form and then inputs into MongoDB
+
+There are 3 files involved
+1) server.js
+  This should be run to start the server
+  after running it, making a request for ~/register.html, a form will open up
+  filling the form and hitting submit will send the data entered to 
+2) addUserToDB.js
+  This has the MongoClient and makes the actuall connection to MongoDB and inserts a document
+  After getting the data from the webpage, it sets the values into variables using req.query.<varname> for internal use and ultimately
+  writing to the DB. Comments provide more information
+3) register.html
+  An extremely simple webpage with a form...
